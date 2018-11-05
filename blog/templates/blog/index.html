@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<article class="container-fluid">
+    <h2 class="title">최근 변경내역</h2>
+    <div class="table-reponsive-xl">
+        <table class="table table-hover">
+            <colgroup>
+                <col />
+                <col style="width: 25%;" />
+                <col style="width: 25%;" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>항목</th>
+                    <th>수정자</th>
+                    <th>수정 시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>
+                        <a href="{% url 'post-detail' post.id %}">
+                            {{ post.title }}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                    </td>
+                    <td>
+                        <a href="#">
+                            {{ post.date_posted|date:"F d, Y" }}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</article>
+
+{% endblock content %}
